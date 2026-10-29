@@ -56,4 +56,8 @@ docs/              Deploy + role guides
 CLI heartbeat every `heartbeat_interval_seconds` (default 900). Server **Down** after 2× interval without a beat.
 
 ## Explicit non-goals (near term)
-Metrics/log/trace platforms (Prometheus, Grafana, Loki/ELK, Kafka pipelines, APM), microservices, Kubernetes, paid SMS/email/FCM as primary notify, mandatory per-host mTLS.
+Metrics/log/trace platforms (Prometheus, Grafana, Loki/ELK, Kafka pipelines, APM), microservices, Kubernetes, paid SMS/email delivery, mandatory per-host mTLS.
+
+## Planned mobile companion
+
+Android-first React Native/Expo source with iOS support is planned; there is no mobile client or push delivery implementation yet. Mobile users will view scoped alerts and request access, while administration remains in the web portal. No-cost FCM/Expo messaging is an optional planned integration, with paid services off by default. See the [mobile documentation](mobile/README.md) for the design, delivery milestones, feature status, and personal/commercial build paths.
