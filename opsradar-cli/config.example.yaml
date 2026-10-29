@@ -1,0 +1,21 @@
+# Per-deployment CLI config. Copy beside the CLI as config.yaml (gitignored).
+#
+# api_key = unique Agent key from Admin UI → Servers → Agent key
+# (NOT a shared global secret.)
+
+url: "http://127.0.0.1:5000/alert"
+api_key: "paste_server_ingest_api_key_here"
+
+# Quiet window (seconds) before POST /alert/resolve for fingerprints not reasserted.
+resolve_after_seconds: 300
+
+# Heartbeat interval for `node cli.js --agent` (default 15 minutes).
+# Backend marks the server Down after 2× this without a beat.
+heartbeat_interval_seconds: 900
+
+message: "Default alert message"
+severity: "minor"
+server_name: "your-server-name-from-ui"
+group_name: "techops"
+app_name: "monitor"
+country_name: "United States"

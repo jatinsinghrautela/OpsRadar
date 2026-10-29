@@ -1,0 +1,16 @@
+{
+  "display": "standalone",
+  "start_url": ".",
+  "icons": [
+    {
+      "src": "opsradar-logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "theme_color": "#2563eb",
+  "name": "OpsRadar",
+  "short_name": "OpsRadar",
+  "background_color": "#ffffff"
+}

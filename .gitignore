@@ -1,0 +1,50 @@
+# Dependencies
+node_modules/
+**/node_modules/
+
+# Environment and secrets
+.env
+.env.local
+.env.*.local
+**/.env
+!/**/.env.example
+credentials.txt
+**/credentials.txt
+opsradar-cli/config.yaml
+opsradar-cli/config.local.yaml
+opsradar-cli/alert-state.json
+
+# Logs and runtime
+logs/
+*.log
+npm-debug.log*
+*.pid
+
+# Build / coverage
+build/
+dist/
+coverage/
+.cache/
+
+# IDE / OS / local AI tooling (not part of the product)
+.idea/
+.vscode/
+.cursor/
+*.swp
+.DS_Store
+Thumbs.db
+
+# Local backups / dumps (folder kept via .gitkeep only)
+backups/**
+!backups/.gitkeep
+*.dump
+*.sql.gz
+
+# Archives and local noise
+*.zip
+*.pdf
+OpsRadar Application.pdf
+
+# Local portfolio gallery captures (upload manually to site)
+screenshots/*
+!screenshots/.gitkeep

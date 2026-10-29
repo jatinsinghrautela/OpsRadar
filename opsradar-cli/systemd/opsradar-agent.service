@@ -1,0 +1,26 @@
+[Unit]
+Description=OpsRadar CLI agent (heartbeat + quiet-alert resolve)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+# Adjusted by scripts/install-linux-service.sh (WorkingDirectory / ExecStart / User).
+WorkingDirectory=/opt/opsradar-cli
+ExecStart=/usr/bin/node /opt/opsradar-cli/cli.js --agent
+Restart=always
+RestartSec=5
+# Cap restart storms (systemd still keeps the unit enabled).
+StartLimitIntervalSec=300
+StartLimitBurst=20
+# Soft realtime niceness for a long-lived agent.
+Nice=5
+# Logs (journald still captures; files mirror Windows agent-*.log).
+StandardOutput=append:/opt/opsradar-cli/agent-stdout.log
+StandardError=append:/opt/opsradar-cli/agent-stderr.log
+# Hardening (safe defaults; drop if your Node path needs more).
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

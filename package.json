@@ -1,0 +1,16 @@
+{
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "jsonwebtoken": "^9.0.2"
+  },
+  "name": "opsradar",
+  "version": "1.0.0",
+  "private": true,
+  "description": "OpsRadar alert and server heartbeat monitoring",
+  "scripts": {
+    "start": "docker compose up -d --build",
+    "stop": "docker compose stop",
+    "logs": "docker compose logs -f",
+    "status": "docker compose ps"
+  }
+}

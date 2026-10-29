@@ -1,0 +1,57 @@
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: opsradar-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-opsradar}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-alert123}
+      POSTGRES_DB: ${POSTGRES_DB:-opsradar}
+    ports:
+      - "${POSTGRES_PORT:-5433}:5432"
+    volumes:
+      - opsradar_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-opsradar} -d ${POSTGRES_DB:-opsradar}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  backend:
+    build: ./opsradar-backend
+    container_name: opsradar-backend
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      DATABASE_URL: postgres://${POSTGRES_USER:-opsradar}:${POSTGRES_PASSWORD:-alert123}@postgres:5432/${POSTGRES_DB:-opsradar}
+      JWT_SECRET: ${JWT_SECRET}
+      PORT: ${PORT:-5000}
+      CORS_ORIGIN: ${CORS_ORIGIN:-http://localhost:3000}
+      BOOTSTRAP_ADMIN_USER: ${BOOTSTRAP_ADMIN_USER:-admin}
+      BOOTSTRAP_ADMIN_PASSWORD: ${BOOTSTRAP_ADMIN_PASSWORD:-ChangeMeNow!}
+      BOOTSTRAP_ADMIN_EMAIL: ${BOOTSTRAP_ADMIN_EMAIL:-admin@localhost.local}
+      ALERT_RETENTION_DAYS: ${ALERT_RETENTION_DAYS:-30}
+      EMAIL_USER: ${EMAIL_USER:-}
+      EMAIL_PASS: ${EMAIL_PASS:-}
+    ports:
+      - "${PORT:-5000}:5000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  frontend:
+    build: ./opsradar-frontend
+    container_name: opsradar-frontend
+    restart: unless-stopped
+    environment:
+      HOST: "0.0.0.0"
+      CHOKIDAR_USEPOLLING: "true"
+      REACT_APP_API_URL: ${REACT_APP_API_URL:-http://localhost:5000}
+      WDS_SOCKET_PORT: "3000"
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+
+volumes:
+  opsradar_pgdata:
