@@ -1,6 +1,6 @@
 # Business use, builds, and optional publishing
 
-Status: future operator runbook. No mobile client, signed mobile release, or store submission is available in this checkout yet. Implement and verify [the delivery plan](PLAN.md) first.
+Status: shared mobile source and local Android build/signing configuration are available. See [current status](BUILD_STATUS.md) and [build commands](../../opsradar-mobile/README.md). This remains an operator publishing checklist: production/device validation, iOS builds and store submissions have not been completed.
 
 ## Deployment choices
 

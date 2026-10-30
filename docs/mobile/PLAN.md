@@ -1,6 +1,6 @@
 # Mobile delivery plan
 
-Status: implementation has not started. This plan authorizes no paid subscriptions or publication. See [scope](SCOPE.md), [design](IMPLEMENTATION.md), and [build paths](README.md).
+Status: milestones 1–3 have a first implementation; local builds and device verification are in progress. See [actual delivery status](BUILD_STATUS.md). The following is the original acceptance plan, not a claim that all platform acceptance checks passed. No paid subscriptions or publication are authorized.
 
 ## Milestone 1: backend readiness
 

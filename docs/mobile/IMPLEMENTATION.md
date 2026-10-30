@@ -1,6 +1,6 @@
 # Mobile implementation design
 
-Status: design, not an implementation report. The web/API/CLI exist; `opsradar-mobile/` and the mobile backend additions below do not.
+Status: original architecture proposal retained for design rationale. A first mobile/backend implementation now exists. See [concrete routes, source behavior and verification](BUILD_STATUS.md), which supersedes proposed names and historical gaps below.
 
 ## Existing components to reuse
 

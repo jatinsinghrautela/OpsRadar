@@ -1,8 +1,8 @@
 # OpsRadar Mobile documentation
 
-Status: planning only. Last reviewed: 2026-10-30.
+Status: first mobile implementation available. Last reviewed: 2026-10-30.
 
-This documentation defines the Android-first, Android/iOS mobile companion. No mobile application, mobile build scripts, push worker, or mobile signing configuration is implemented in this checkout. Commands marked as future instructions cannot be run until the corresponding implementation milestone is complete.
+Start with [current implementation and verification status](BUILD_STATUS.md) and the [mobile run/build guide](../../opsradar-mobile/README.md). The original plan and operator checklists below remain useful; implementation status in BUILD_STATUS.md takes precedence over historical future-tense sections.
 
 ## Reading order
 
@@ -18,7 +18,7 @@ This documentation defines the Android-first, Android/iOS mobile companion. No m
 
 ## Agreed direction
 
-- One React Native + Expo + TypeScript codebase, proposed directory `opsradar-mobile/`.
+- One React Native + Expo + TypeScript codebase, directory `opsradar-mobile/`.
 - Android is the first installation and real-device test target. Design and source must also support iOS; iOS is not considered verified until built and tested there.
 - Reuse the Express API and PostgreSQL. The web portal remains the administration interface.
 - Mobile users read alerts, request group/server access, and manage their notification preferences.

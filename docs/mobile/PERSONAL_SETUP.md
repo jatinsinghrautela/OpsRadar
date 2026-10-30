@@ -1,6 +1,6 @@
 # Personal setup: free Android path
 
-Status: preparation guide and future build runbook. The mobile app and configuration switches are not implemented yet. You can run the existing backend/web/agents now; mobile build commands below require completion of [the plan](PLAN.md).
+Status: the first mobile implementation and local Android build script are available. Follow the executable [mobile run/build guide](../../opsradar-mobile/README.md) and [current status](BUILD_STATUS.md) first. The original checklist below is retained for operator preparation; push and iOS device verification remain pending.
 
 ## What you need
 
