@@ -3,6 +3,8 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { User } = require('../models/user');
 const { AuditLog } = require('../models/audit_log');
+const { sequelize } = require('../models/country');
+const { MobileSession, MobileDevice } = require('../models/mobile');
 const { generateTotpSecret, buildOtpauthUrl, buildQrDataUrl, verifyTotp } = require('../utils/totp');
 const {
   getSecretKey,
@@ -98,7 +100,7 @@ router.post('/login/totp', async (req, res) => {
       return res.status(403).json({ error: 'Invalid token purpose' });
     }
     const user = await User.findByPk(payload.user_id);
-    if (!user || !user.totp_enabled || !user.totp_secret) {
+    if (!user?.is_active || user.must_change_password || !user.totp_enabled || !user.totp_secret) {
       return res.status(400).json({ error: 'TOTP is not enabled for this user' });
     }
     if (!verifyTotp(totp_code, user.totp_secret)) {
@@ -126,13 +128,18 @@ router.post('/change-password', authenticateChangePassword, async (req, res) => 
     if (!user) return res.status(404).json({ error: 'User not found' });
 
     const password_hash = await bcrypt.hash(new_password, 10);
-    await user.update({ password_hash, must_change_password: false });
-
-    await AuditLog.create({
-      user_id: user.user_id,
-      action: 'password_changed',
-      details: { message: 'User set a new password after temp/reset' }
+    await sequelize.transaction(async transaction => {
+      await user.update({ password_hash, must_change_password: false }, { transaction });
+      await MobileSession.update({ revoked_at: new Date() }, { where: { user_id: user.user_id, revoked_at: null }, transaction });
+      await MobileDevice.update({ active: false }, { where: { user_id: user.user_id }, transaction });
+      await AuditLog.create({ user_id: user.user_id, action: 'password_changed', details: { message: 'User set a new password after temp/reset' } }, { transaction });
     });
+
+    if (user.totp_enabled && user.totp_secret) {
+      return res.json({ requires_totp: true, pre_auth_token: jwt.sign(
+        { user_id: user.user_id, purpose: 'totp' }, getSecretKey(), { expiresIn: '5m' }
+      ) });
+    }
 
     const token = jwt.sign(
       { user_id: user.user_id, is_admin: user.is_admin },

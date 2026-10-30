@@ -2,7 +2,7 @@
 
 ## Selected direction: Prism
 
-The user selected **Prism**, with Precision-style severity icons and Light/Dark/System appearance controls. Open the [Prism design and prototype guide](PRISM.md) for the current design links, 26 screens, 140 native prototype connections, theme behavior, and labeled flow-map fallback. The radar/orbit concepts below are archived alternatives, not the selected direction. The mobile app itself is still unimplemented.
+The user selected **Prism**, with Precision-style severity icons and Light/Dark/System appearance controls. Open the [Prism design and prototype guide](PRISM.md) for the current design links, 26 screens, 140 native prototype connections, theme behavior, and labeled flow-map fallback. The radar/orbit concepts below are archived alternatives, not the selected direction. The first mobile implementation is available; see [current status](../BUILD_STATUS.md) and the real UI screenshots under `opsradar-mobile/screenshots/`.
 
 ## Archived first concept: Radar editorial
 

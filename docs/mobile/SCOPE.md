@@ -1,6 +1,6 @@
 # Mobile application scope
 
-Status: proposed product scope; no mobile client exists yet. See [feature status](FEATURES.md) for implementation state.
+Status: agreed product scope, now represented by the first mobile implementation. See [feature status](FEATURES.md) and [verified delivery status](BUILD_STATUS.md).
 
 ## Purpose and user journey
 

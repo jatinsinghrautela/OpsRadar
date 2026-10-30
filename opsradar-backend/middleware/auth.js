@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const { Server } = require('../models/server');
+const { User } = require('../models/user');
 const { hashIngestApiKey } = require('../services/ingestKeys');
 const logger = require('../utils/logger');
 
@@ -15,7 +16,6 @@ const authenticateToken = async (req, res, next) => {
   try {
     const payload = jwt.verify(token, getSecretKey());
     if (payload.purpose) return res.status(403).json({ error: 'This token cannot access application data' });
-    const { User } = require('../models/user');
     const user = await User.findByPk(payload.user_id);
     if (!user?.is_active || user.must_change_password) return res.status(401).json({ error: 'Account inactive or password change required' });
     if (payload.sid) {
@@ -73,19 +73,23 @@ const authenticateAlertIngest = async (req, res, next) => {
   }
 };
 
-const authenticateChangePassword = (req, res, next) => {
+const authenticateChangePassword = async (req, res, next) => {
   const bearer = req.headers['authorization']?.split(' ')[1];
   const headerToken = req.headers['x-change-token'];
   const token = headerToken || bearer;
   if (!token) return res.status(401).json({ error: 'No change token provided' });
-  jwt.verify(token, getSecretKey(), (err, payload) => {
-    if (err) return res.status(403).json({ error: 'Invalid or expired change token' });
-    if (payload.purpose && payload.purpose !== 'change_password') {
-      return res.status(403).json({ error: 'Invalid token purpose' });
-    }
+  let payload;
+  try { payload = jwt.verify(token, getSecretKey()); }
+  catch { return res.status(403).json({ error: 'Invalid or expired change token' }); }
+  // Ordinary sessions must pass the same revocation checks as every other API.
+  if (!payload.purpose) return authenticateToken(req, res, next);
+  if (payload.purpose !== 'change_password') return res.status(403).json({ error: 'Invalid token purpose' });
+  try {
+    const user = await User.findByPk(payload.user_id);
+    if (!user?.is_active || !user.must_change_password) return res.status(403).json({ error: 'Password change session expired' });
     req.user = payload;
     next();
-  });
+  } catch { res.status(500).json({ error: 'Authentication failed' }); }
 };
 
 module.exports = {

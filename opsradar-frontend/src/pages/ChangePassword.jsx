@@ -38,6 +38,11 @@ const ChangePassword = () => {
       const data = await changePassword(password, changeToken);
       sessionStorage.removeItem('changeToken');
       sessionStorage.removeItem('changeUsername');
+      if (data.requires_totp) {
+        localStorage.removeItem('authToken');
+        navigate('/login');
+        return;
+      }
       localStorage.setItem('authToken', data.token);
       if (data.must_enroll_totp) {
         navigate('/totp-setup');

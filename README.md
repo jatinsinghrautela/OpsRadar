@@ -80,7 +80,7 @@ See [docs/GUIDE_ENGINEER.md](docs/GUIDE_ENGINEER.md) for always-on setup:
 | [Engineer / CLI guide](docs/GUIDE_ENGINEER.md) | Agent hosts |
 | [User guide](docs/GUIDE_USER.md) | Regular web users |
 | [Architecture](docs/ARCHITECTURE.md) | How the system fits together |
-| [Mobile app documentation](docs/mobile/README.md) | Planned scope, implementation, feature defaults, free personal builds, and business publishing |
+| [Mobile app documentation](docs/mobile/README.md) | Mobile implementation, current verification, feature defaults, local builds, and business publishing |
 
 ## Packages
 

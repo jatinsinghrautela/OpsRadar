@@ -10,7 +10,7 @@ Reviewed: 2026-10-30. See [verification details](BUILD_STATUS.md) and [run/build
 | Prism Light/Dark/System | Implemented and persistent | Follows OS unless selected |
 | Password/TOTP and revocable mobile sessions | Implemented | Native storage/device validation pending |
 | Severity preferences | Implemented | Critical/major initially enabled |
-| Android local build and release signing | Script/config implemented | Native build result and real-device verification |
+| Android local build and release signing | Signed ARM64 APK built and signature verified | Real-device installation/runtime verification pending |
 | iOS client | Shared source/configuration | Requires macOS/Xcode build and tests |
 | Push device registration/outbox/receipts | Implemented; provider mocked in tests | Disabled until owner credentials and real delivery tests |
 | Android native push | Adapter implemented | PUSH_ENABLED=false, PUSH_PROVIDER=none |

@@ -127,6 +127,26 @@ test('outbox sends minimal payloads, checks receipts and cancels revoked grants 
     await device.update({ active: false });
   } finally { global.fetch = originalFetch; process.env.PUSH_ENABLED = 'false'; process.env.PUSH_PROVIDER = 'none'; }
 });
+test('password reset revokes mobile sessions/devices, consumes change token and preserves TOTP', async () => {
+  const { authenticator } = require('otplib');
+  const secret = authenticator.generateSecret();
+  const account = await User.create({ username: 'reset-test', email: 'reset@example.test', password_hash: await bcrypt.hash('old-password', 4), is_active: true, totp_enabled: true, totp_secret: secret });
+  const bearer = jwt.sign({ user_id: account.user_id }, process.env.JWT_SECRET);
+  const session = (await request(app).post('/mobile/sessions').set(auth(bearer))).body;
+  const sid = jwt.verify(session.token, process.env.JWT_SECRET).sid;
+  const device = await MobileDevice.create({ device_id: require('crypto').randomUUID(), user_id: account.user_id, session_id: sid, platform: 'android', push_token: 'ExpoPushToken[reset-test]', active: true });
+  await account.update({ must_change_password: true });
+  const change = jwt.sign({ user_id: account.user_id, purpose: 'change_password' }, process.env.JWT_SECRET, { expiresIn: '15m' });
+  const response = await request(app).post('/change-password').set(auth(change)).send({ new_password: 'new-password' });
+  assert.equal(response.status, 200); assert.equal(response.body.requires_totp, true); assert.equal(response.body.token, undefined);
+  assert.equal((await request(app).get('/mobile/access').set(auth(session.token))).status, 401);
+  assert.equal((await request(app).post('/mobile/sessions/refresh').send({ refresh_token: session.refresh_token })).status, 401);
+  await device.reload(); assert.equal(device.active, false);
+  assert.equal((await request(app).post('/change-password').set(auth(change)).send({ new_password: 'replay-password' })).status, 403);
+  assert.equal((await request(app).post('/change-password').set(auth(session.token)).send({ new_password: 'revoked-password' })).status, 401);
+  const verified = await request(app).post('/login/totp').send({ pre_auth_token: response.body.pre_auth_token, totp_code: authenticator.generate(secret) });
+  assert.equal(verified.status, 200); assert.ok(verified.body.token);
+});
 } else {
   test('mobile integration uses a separate database', { skip: 'Run npm run test:mobile for the isolated database suite' }, () => {});
 }
