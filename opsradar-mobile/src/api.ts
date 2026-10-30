@@ -78,8 +78,16 @@ export class ApiClient {
       );
     }
     const data = await response.json().catch(() => ({}));
-    if (!response.ok)
-      throw new ApiError(data.error || "Request failed", response.status);
+    if (!response.ok) {
+      const fallback =
+        response.status === 404 && path === "/mobile/sessions"
+          ? "Mobile sign-in is unavailable on this server. Ask your administrator to update OpsRadar, then sign in again."
+          : `Request failed (HTTP ${response.status}). Please try again.`;
+      throw new ApiError(
+        typeof data.error === "string" ? data.error : fallback,
+        response.status,
+      );
+    }
     return data;
   }
   async publicRequest(path: string, body?: unknown, token?: string) {

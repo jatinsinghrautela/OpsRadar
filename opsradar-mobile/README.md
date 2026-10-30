@@ -43,6 +43,10 @@ Use `npm run web` for a browser preview. `npm run android` and `npm run build:an
 
 Native sessions use SecureStore. Browser preview sessions use sessionStorage and are intended for development. Push is optional and disabled by default; the inbox works without Firebase/Expo accounts. Remote Android push is unavailable in Expo Go: notification registration/listeners are skipped there and the app explains the limitation. UI, scoped inbox, access requests and preferences remain usable. A native build will eventually be required for actual background push and standalone distribution; that is separate from this free Expo Go preview. See [Expo notifications limitations](https://docs.expo.dev/versions/v58.0.0/sdk/notifications/).
 
+### Login succeeds through TOTP, then fails
+
+Starting an existing Docker container does not update its image. A backend built before mobile support can accept the authenticator code but return HTTP 404 when the app subsequently calls `POST /mobile/sessions`. From the repository root run `docker compose up -d --build backend` to rebuild the API and apply migration `008-mobile.js`, then restart mobile sign-in. Keep the existing PostgreSQL volume; do not reset the database or authenticator enrollment. This backend update works with the first signed APK as well as Expo Go.
+
 ## Local Android APK
 
 On Windows, install Android SDK and JDK 17, set `ANDROID_HOME`, then run:
