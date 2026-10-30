@@ -31,6 +31,8 @@
   "scripts": {
     "start": "node scripts/start-expo-go.cjs",
     "start:go": "node scripts/start-expo-go.cjs",
+    "expo:login": "node scripts/start-expo-go.cjs --cli login --no-browser",
+    "expo:whoami": "node scripts/start-expo-go.cjs --cli whoami",
     "android": "expo run:android",
     "ios": "expo run:ios",
     "web": "expo start --web",

@@ -1,4 +1,5 @@
-// Preview in Expo Go; no Gradle, native compilation, emulator or cloud build.
+// Expo Go and account commands share one private Expo home on the project drive.
+// No Gradle, native compilation, emulator or cloud build.
 const fs = require("node:fs");
 const path = require("node:path");
 const { spawn } = require("node:child_process");
@@ -22,15 +23,16 @@ const cli = path.join(
   path.dirname(require.resolve("expo/package.json")),
   "bin/cli",
 );
-const child = spawn(
-  process.execPath,
-  [cli, "start", "--go", ...process.argv.slice(2)],
-  {
-    cwd: project,
-    env,
-    stdio: "inherit",
-  },
-);
+const argumentsFromUser = process.argv.slice(2);
+const cliArguments =
+  argumentsFromUser[0] === "--cli"
+    ? argumentsFromUser.slice(1)
+    : ["start", "--go", ...argumentsFromUser];
+const child = spawn(process.execPath, [cli, ...cliArguments], {
+  cwd: project,
+  env,
+  stdio: "inherit",
+});
 child.on("error", (error) => {
   console.error(error.message);
   process.exitCode = 1;

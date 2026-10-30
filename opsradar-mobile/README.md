@@ -15,6 +15,20 @@ npm start
 
 Install an [Expo Go version compatible with SDK 58](https://expo.dev/go?device=true&platform=android&sdkVersion=58), connect the phone and PC to the same trusted Wi-Fi, run `npm start`, and scan the terminal QR code from Expo Go. The launcher explicitly selects Expo Go and keeps npm/Expo/Metro temporary caches under root `.cache` on the project's drive. It does not compile or publish an APK. Metro must remain running during preview.
 
+### Expo account login, including physical iOS previews
+
+Expo Go on a physical iOS device requires the same Expo account in the phone app and the CLI. Use these project commands so login and Metro share the same private Expo home on D::
+
+```powershell
+npm run expo:login -- --username jatinsinghrautela
+# Enter your Expo password and any 2FA code at the terminal prompts.
+npm run expo:whoami
+# Confirm jatinsinghrautela, then:
+npm start
+```
+
+Use your own account name if different. This is the Expo account, not the OpsRadar `admin` login. Login uses terminal prompts to avoid the Windows automatic-browser-launch failure. Do not put passwords in command arguments or chat. Plain `npx expo login` uses the default Expo home on C: and does not sign into this project's separate D: home. Restart Metro after changing accounts, then scan again or tap Try Again in Expo Go. The account/login step does not enable a paid build or subscription. See [Expo's account-mismatch guide](https://docs.expo.dev/troubleshooting/expo-go-sign-in-required/).
+
 For the separate portable development API, stop its existing terminal first, then start it from `../opsradar-backend` with PowerShell:
 
 ```powershell
