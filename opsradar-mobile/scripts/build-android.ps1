@@ -13,7 +13,10 @@ $env:TEMP = Join-Path $projectRoot '..\.cache\tmp'
 $env:TMP = $env:TEMP
 $env:npm_config_cache = Join-Path $projectRoot '..\.cache\npm'
 $env:ANDROID_USER_HOME = Join-Path $projectRoot '..\.cache\android'
-New-Item -ItemType Directory -Force $env:TEMP, $env:GRADLE_USER_HOME, $env:ANDROID_USER_HOME | Out-Null
+# Expo's shell-only override keeps this local build's caches off the system drive.
+$env:__UNSAFE_EXPO_HOME_DIRECTORY = Join-Path $projectRoot '..\.cache\expo'
+$env:EXPO_NO_TELEMETRY = '1'
+New-Item -ItemType Directory -Force $env:TEMP, $env:GRADLE_USER_HOME, $env:ANDROID_USER_HOME, $env:__UNSAFE_EXPO_HOME_DIRECTORY | Out-Null
 $env:OPSRADAR_ALLOW_HTTP = if ($AllowHttp) { 'true' } else { 'false' }
 npx.cmd expo prebuild --platform android --no-install
 if ($LASTEXITCODE -ne 0) { throw 'Android prebuild failed' }
