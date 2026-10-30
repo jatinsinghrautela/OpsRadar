@@ -14,6 +14,7 @@ This documentation defines the Android-first, Android/iOS mobile companion. No m
 | [Feature status and defaults](FEATURES.md) | What exists, what is planned, and what stays disabled |
 | [Personal setup: free Android use](PERSONAL_SETUP.md) | Prerequisites, local builds, credentials, installation, and costs |
 | [Business setup and publishing](BUSINESS_SETUP.md) | Self-hosted business use, Android/iOS releases, and operator responsibilities |
+| [Visual design and screen concepts](design/README.md) | Modern visual direction, six editable SVG screens, and Figma handoff status |
 
 ## Agreed direction
 
