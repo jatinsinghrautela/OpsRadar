@@ -2,6 +2,8 @@
 
 The first mobile implementation is in `opsradar-mobile/`. See its [run/build instructions](../../opsradar-mobile/README.md). Earlier architecture sections describe the original plan; the concrete routes and status below take precedence.
 
+Development preference: Expo Go on a physical Android phone is now the default (`npm start`). Native compilation/cloud builds are not part of routine preview. The launcher uses D: caches, and the client skips remote-push APIs in Expo Go. Physical-phone Expo Go execution still needs user testing; TypeScript and Metro bundling do not establish a device test. Remote push requires a separate native build later.
+
 ## Available
 
 - React Native 0.88 / Expo SDK 58 / TypeScript, bundled DM Sans, Prism cards/gradients, Precision severity icons, persistent Light/Dark/System appearance.

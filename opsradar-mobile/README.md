@@ -4,7 +4,7 @@ Android-first Expo/React Native companion with shared iOS source. The Prism inte
 
 ## Run locally
 
-Use Node 24, npm, and a running OpsRadar API. From this directory:
+Default: use Expo Go on a physical Android phone. No Android Studio, emulator, Gradle build, EAS cloud build or paid account is needed for this preview. Use Node 24, npm, and a running OpsRadar API. From this directory:
 
 ```sh
 npm ci
@@ -13,9 +13,21 @@ cp .env.example .env.local
 npm start
 ```
 
-Use `npm run web` for a browser preview or `npm run android` with Android SDK/JDK 17 and a connected device/emulator. Android emulator host access uses `10.0.2.2`; a physical phone needs your server's LAN/VPN address or HTTPS URL. Change the API address from the sign-in screen. Never put JWT secrets, database passwords or provider service accounts in `EXPO_PUBLIC_*` variables.
+Install an [Expo Go version compatible with SDK 58](https://expo.dev/go?device=true&platform=android&sdkVersion=58), connect the phone and PC to the same trusted Wi-Fi, run `npm start`, and scan the terminal QR code from Expo Go. The launcher explicitly selects Expo Go and keeps npm/Expo/Metro temporary caches under root `.cache` on the project's drive. It does not compile or publish an APK. Metro must remain running during preview.
 
-Native sessions use SecureStore. Browser preview sessions use sessionStorage and are intended for development. Push is optional and disabled by default; the inbox works without Firebase/Expo accounts. Expo Go is not a native push verification environment.
+For the separate portable development API, stop its existing terminal first, then start it from `../opsradar-backend` with PowerShell:
+
+```powershell
+$env:DEV_SEED='true'
+$env:DEV_API_HOST='0.0.0.0'
+node scripts/dev-local.cjs
+```
+
+This deliberately makes the API reachable on your trusted LAN; PostgreSQL remains loopback-only. Allow Node through Windows Firewall on the private network if prompted. Set `EXPO_PUBLIC_API_URL` in `.env.local` to `http://YOUR-PC-LAN-IP:5050` before starting Metro, or change **Server address** on sign-in. `localhost` on the phone refers to the phone. Do not expose this seeded development API to the public internet; omit `DEV_API_HOST` for the normal loopback-only default. Other API deployments should use their own reachable URL.
+
+Use `npm run web` for a browser preview. `npm run android` and `npm run build:android` remain explicit optional native build commands, not routine development steps. Android emulator host access uses `10.0.2.2`; a physical phone needs your server's LAN/VPN address or HTTPS URL. Never put JWT secrets, database passwords or provider service accounts in `EXPO_PUBLIC_*` variables.
+
+Native sessions use SecureStore. Browser preview sessions use sessionStorage and are intended for development. Push is optional and disabled by default; the inbox works without Firebase/Expo accounts. Remote Android push is unavailable in Expo Go: notification registration/listeners are skipped there and the app explains the limitation. UI, scoped inbox, access requests and preferences remain usable. A native build will eventually be required for actual background push and standalone distribution; that is separate from this free Expo Go preview. See [Expo notifications limitations](https://docs.expo.dev/versions/v58.0.0/sdk/notifications/).
 
 ## Local Android APK
 

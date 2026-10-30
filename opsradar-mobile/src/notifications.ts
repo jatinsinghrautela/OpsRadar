@@ -1,7 +1,10 @@
 import { Platform } from "react-native";
 import Constants from "expo-constants";
+import { isRunningInExpoGo } from "expo";
 import { ApiClient } from "./api";
 export async function registerPush(api: ApiClient): Promise<string> {
+  if (isRunningInExpoGo())
+    return "Expo Go preview: remote push requires a native app build. Your inbox still works.";
   const status = await api.request<{ enabled: boolean; ios_enabled: boolean }>(
     "/mobile/push-status",
   );
@@ -32,7 +35,7 @@ export async function registerPush(api: ApiClient): Promise<string> {
 export async function listenForPush(
   onOpen: (data: Record<string, unknown>) => void,
 ) {
-  if (Platform.OS === "web") return () => {};
+  if (Platform.OS === "web" || isRunningInExpoGo()) return () => {};
   const Notifications = await import("expo-notifications");
   Notifications.setNotificationHandler({
     handleNotification: async () => ({

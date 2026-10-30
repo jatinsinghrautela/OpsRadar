@@ -27,7 +27,9 @@ async function main() {
       const alert = await Alert.create({ severity, message, server_id: server.server_id, group_id: group.group_id, last_seen_at: new Date() }); await require('../services/notify').createNotificationsForAlert(alert);
     }
   }
-  const server = require('../app').createApp().listen(5050, '127.0.0.1', () => console.log('Development API: http://localhost:5050; credentials: .cache/dev-local/credentials.json. Docker data is untouched.'));
+  // Opt in to a trusted LAN only when testing Expo Go on a physical phone.
+  const host = process.env.DEV_API_HOST || '127.0.0.1';
+  const server = require('../app').createApp().listen(5050, host, () => console.log(`Development API listening on ${host}:5050; credentials: .cache/dev-local/credentials.json. Docker data is untouched.`));
   async function stop() { server.close(); await require('../models/country').sequelize.close(); await pg.stop(); process.exit(0); }
   process.on('SIGINT', stop); process.on('SIGTERM', stop);
 }
