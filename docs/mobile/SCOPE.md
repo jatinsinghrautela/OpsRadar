@@ -25,6 +25,8 @@ Give an OpsRadar user a phone-based alert inbox and notifications for resources 
 | Request access | Search a minimal requestable catalogue, select a group/server, submit reason |
 | Settings | Severity preferences, device notification-permission status, session/logout controls |
 
+Selected visual direction: **Prism** with Precision-style severity icons and a Light/Dark/System appearance preference. See the [design/prototype guide](design/PRISM.md). Settings must persist the appearance choice in the future app; System must follow device appearance. These are implemented as simulated Figma navigation states only at this stage.
+
 ## Authorization rules
 
 - Server-side permission checks are authoritative for lists, details, notification history, and delivery jobs.

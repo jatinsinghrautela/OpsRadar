@@ -1,0 +1,25 @@
+// Editable navigation legend and labeled visual arrows for the Prism prototype.
+const page=await figma.getNodeByIdAsync('12:35');
+await figma.setCurrentPageAsync(page);
+await Promise.all(['Regular','Bold'].map(style=>figma.loadFontAsync({family:'DM Sans',style})));
+const created=[];const tr=n=>(created.push(n.id),n);
+const rgb=h=>({r:parseInt(h.slice(1,3),16)/255,g:parseInt(h.slice(3,5),16)/255,b:parseInt(h.slice(5,7),16)/255});
+const fill=h=>[{type:'SOLID',color:rgb(h)}];
+function text(s,w=1580,size=14,color='#716780',bold=false){const n=tr(figma.createText());n.fontName={family:'DM Sans',style:bold?'Bold':'Regular'};n.characters=s;n.fontSize=size;n.lineHeight={unit:'PERCENT',value:140};n.fills=fill(color);n.textAutoResize='HEIGHT';n.resize(w,n.height);return n;}
+function stack(name,w=1660,gap=20,pad=0,bg=null,h=false){const n=tr(figma.createAutoLayout(h?'HORIZONTAL':'VERTICAL'));n.name=name;n.resize(w,10);n.layoutSizingHorizontal='FIXED';n.layoutSizingVertical='HUG';n.itemSpacing=gap;n.paddingLeft=n.paddingRight=n.paddingTop=n.paddingBottom=pad;n.fills=bg?fill(bg):[];n.cornerRadius=22;n.clipsContent=false;return n;}
+const add=(p,n)=>(p.appendChild(n),n);
+const board=stack('Prism / Screen flows and tap destinations',1740,27,40,'#F4F2FB');page.appendChild(board);board.x=100;board.y=100;
+add(board,text('OPSRADAR / PRISM',1660,14,'#6250B8',true));add(board,text('Every tap has a destination.',1660,38,'#2D2846',true));
+add(board,text('Labeled arrows explain the primary routes. Native prototype connections are attached to buttons and cards on page 01. Use Present to click through.',1660));
+const lanes=[
+ {title:'SIGN IN AND READ',nodes:[['Sign in','Username and password'],['Verify identity','TOTP when enabled'],['Alert inbox','Approved resources only'],['Alert details','Read-only current status']],arrows:['Tap Sign in','Tap Verify and continue','Tap an alert card']},
+ {title:'REQUEST ACCESS',nodes:[['My access','Granted groups and servers'],['Find resources','Search groups or servers'],['Request access','Resource and reason'],['Request pending','Awaiting web-admin decision']],arrows:['Tap Request access','Tap Infrastructure','Tap Send access request']},
+ {title:'ACTIVITY AND APPROVAL',nodes:[['Alert inbox','Current active alerts'],['Activity','Alert and request updates'],['My access','Approved resources'],['Alert inbox','Newly granted visibility']],arrows:['Tap Activity','Tap access-approved update','Tap Alerts in navigation']},
+ {title:'APPEARANCE',nodes:[['Light settings','Light selected'],['Dark settings','Dark selected'],['System settings','Follow the device'],['Same screen / other theme','Sun or moon shortcut']],arrows:['Tap Dark','Tap System','Tap sun / moon']}
+];
+for(const lane of lanes){add(board,text(lane.title,1660,12,'#6250B8',true));const row=add(board,stack('Flow / '+lane.title,1660,0,0,null,true));row.counterAxisAlignItems='CENTER';for(let i=0;i<lane.nodes.length;i++){const [name,sub]=lane.nodes[i];const card=add(row,stack('Screen / '+name,280,10,22,'#FFFFFF'));card.strokes=fill('#DDD6EA');add(card,text(name,236,21,'#2D2846',true));add(card,text(sub,236,13));if(i<lane.nodes.length-1){const arrow=add(row,stack('Connector / '+lane.arrows[i],180,10,8));add(arrow,text(lane.arrows[i],164,12,'#6250B8',true));const v=tr(figma.createNodeFromSvg('<svg xmlns="http://www.w3.org/2000/svg" width="164" height="22"><path d="M2 11h153m-8-7 9 7-9 7" fill="none" stroke="#8A77C6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>'));v.name='Directional connector';add(arrow,v);}}}
+add(board,text('AUTHENTICATION BRANCHES',1660,12,'#6250B8',true));add(board,text('Temporary-password link → Change password → TOTP → Inbox. Forgot-password link → Reset request → Sign in. Sign out → Sign in. All are sample-state prototype navigation.',1660,14,'#2D2846'));
+add(board,text('LIGHT / DARK / SYSTEM',1660,12,'#6250B8',true));add(board,text('Light and Dark are complete mirrored screen sets on the same prototype page. System has a selected-state preview; a Figma prototype cannot detect the real phone theme. App-level preference persistence and OS-following behavior remain implementation work.',1660));
+add(board,text('SEVERITY ICONS',1660,12,'#6250B8',true));add(board,text('Critical: warning triangle + red label. Major: drive icon + amber label. Minor: information circle + blue label. Trivial: check circle + green label. Labels remain visible alongside color and shape.',1660,14,'#2D2846'));
+add(board,text('PROTOTYPE BOUNDARIES',1660,12,'#6250B8',true));add(board,text('No live backend, real login, push delivery, or approval is performed. Search, Filters, Servers tab, and severity On/Off values are illustrative. Sample alert cards open the critical detail example; sample resource rows open the Infrastructure request example. Admin approval remains in the web portal.',1660));
+return {boardId:board.id,pageId:page.id,createdNodeIds:[board.id,...board.findAll(()=>true).map(n=>n.id)],visualConnectorCount:lanes.reduce((n,l)=>n+l.arrows.length,0),width:board.width,height:board.height};

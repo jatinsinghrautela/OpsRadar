@@ -1,0 +1,1011 @@
+{
+  "fileKey": "osWxsVNpXNTD33zC3c6abf",
+  "pageId": "12:34",
+  "screenCount": 26,
+  "interactionCount": 140,
+  "screens": [
+    {
+      "key": "Light/login",
+      "id": "14:96",
+      "x": 100,
+      "y": 180
+    },
+    {
+      "key": "Light/password",
+      "id": "14:133",
+      "x": 570,
+      "y": 180
+    },
+    {
+      "key": "Light/totp",
+      "id": "14:159",
+      "x": 1040,
+      "y": 180
+    },
+    {
+      "key": "Light/reset",
+      "id": "14:188",
+      "x": 1510,
+      "y": 180
+    },
+    {
+      "key": "Light/inbox",
+      "id": "14:214",
+      "x": 100,
+      "y": 1135
+    },
+    {
+      "key": "Light/detail",
+      "id": "14:277",
+      "x": 570,
+      "y": 1135
+    },
+    {
+      "key": "Light/notifications",
+      "id": "14:316",
+      "x": 1040,
+      "y": 1135
+    },
+    {
+      "key": "Light/access",
+      "id": "14:370",
+      "x": 1510,
+      "y": 1135
+    },
+    {
+      "key": "Light/catalogue",
+      "id": "14:408",
+      "x": 100,
+      "y": 2090
+    },
+    {
+      "key": "Light/request",
+      "id": "14:448",
+      "x": 570,
+      "y": 2090
+    },
+    {
+      "key": "Light/pending",
+      "id": "14:482",
+      "x": 1040,
+      "y": 2090
+    },
+    {
+      "key": "Light/settings",
+      "id": "14:518",
+      "x": 1510,
+      "y": 2090
+    },
+    {
+      "key": "Light/settings-system",
+      "id": "14:585",
+      "x": 100,
+      "y": 3045
+    },
+    {
+      "key": "Dark/login",
+      "id": "14:652",
+      "x": 100,
+      "y": 4280
+    },
+    {
+      "key": "Dark/password",
+      "id": "14:690",
+      "x": 570,
+      "y": 4280
+    },
+    {
+      "key": "Dark/totp",
+      "id": "14:717",
+      "x": 1040,
+      "y": 4280
+    },
+    {
+      "key": "Dark/reset",
+      "id": "14:747",
+      "x": 1510,
+      "y": 4280
+    },
+    {
+      "key": "Dark/inbox",
+      "id": "14:774",
+      "x": 100,
+      "y": 5235
+    },
+    {
+      "key": "Dark/detail",
+      "id": "14:838",
+      "x": 570,
+      "y": 5235
+    },
+    {
+      "key": "Dark/notifications",
+      "id": "14:878",
+      "x": 1040,
+      "y": 5235
+    },
+    {
+      "key": "Dark/access",
+      "id": "14:933",
+      "x": 1510,
+      "y": 5235
+    },
+    {
+      "key": "Dark/catalogue",
+      "id": "14:972",
+      "x": 100,
+      "y": 6190
+    },
+    {
+      "key": "Dark/request",
+      "id": "14:1013",
+      "x": 570,
+      "y": 6190
+    },
+    {
+      "key": "Dark/pending",
+      "id": "14:1048",
+      "x": 1040,
+      "y": 6190
+    },
+    {
+      "key": "Dark/settings",
+      "id": "14:1085",
+      "x": 1510,
+      "y": 6190
+    },
+    {
+      "key": "Dark/settings-system",
+      "id": "14:1153",
+      "x": 100,
+      "y": 7145
+    }
+  ],
+  "links": [
+    {
+      "source": "14:101",
+      "label": "Switch appearance",
+      "destination": "14:652",
+      "target": "Dark/login"
+    },
+    {
+      "source": "14:126",
+      "label": "Sign in",
+      "destination": "14:159",
+      "target": "Light/totp"
+    },
+    {
+      "source": "14:130",
+      "label": "Change temporary password",
+      "destination": "14:133",
+      "target": "Light/password"
+    },
+    {
+      "source": "14:131",
+      "label": "Request reset",
+      "destination": "14:188",
+      "target": "Light/reset"
+    },
+    {
+      "source": "14:138",
+      "label": "Switch appearance",
+      "destination": "14:690",
+      "target": "Dark/password"
+    },
+    {
+      "source": "14:151",
+      "label": "Save password",
+      "destination": "14:159",
+      "target": "Light/totp"
+    },
+    {
+      "source": "14:155",
+      "label": "Back to sign in",
+      "destination": "14:96",
+      "target": "Light/login"
+    },
+    {
+      "source": "14:164",
+      "label": "Switch appearance",
+      "destination": "14:717",
+      "target": "Dark/totp"
+    },
+    {
+      "source": "14:179",
+      "label": "Verify and continue",
+      "destination": "14:214",
+      "target": "Light/inbox"
+    },
+    {
+      "source": "14:183",
+      "label": "Back to sign in",
+      "destination": "14:96",
+      "target": "Light/login"
+    },
+    {
+      "source": "14:193",
+      "label": "Switch appearance",
+      "destination": "14:747",
+      "target": "Dark/reset"
+    },
+    {
+      "source": "14:205",
+      "label": "Send reset request",
+      "destination": "14:96",
+      "target": "Light/login"
+    },
+    {
+      "source": "14:209",
+      "label": "Back to sign in",
+      "destination": "14:96",
+      "target": "Light/login"
+    },
+    {
+      "source": "14:219",
+      "label": "Switch appearance",
+      "destination": "14:774",
+      "target": "Dark/inbox"
+    },
+    {
+      "source": "14:229",
+      "label": "Access",
+      "destination": "14:370",
+      "target": "Light/access"
+    },
+    {
+      "source": "14:231",
+      "label": "Settings",
+      "destination": "14:518",
+      "target": "Light/settings"
+    },
+    {
+      "source": "14:243",
+      "label": "Open activity",
+      "destination": "14:316",
+      "target": "Light/notifications"
+    },
+    {
+      "source": "14:247",
+      "label": "Open alert",
+      "destination": "14:277",
+      "target": "Light/detail"
+    },
+    {
+      "source": "14:257",
+      "label": "Open alert",
+      "destination": "14:277",
+      "target": "Light/detail"
+    },
+    {
+      "source": "14:267",
+      "label": "Open alert",
+      "destination": "14:277",
+      "target": "Light/detail"
+    },
+    {
+      "source": "14:282",
+      "label": "Switch appearance",
+      "destination": "14:838",
+      "target": "Dark/detail"
+    },
+    {
+      "source": "14:290",
+      "label": "Alerts",
+      "destination": "14:214",
+      "target": "Light/inbox"
+    },
+    {
+      "source": "14:292",
+      "label": "Access",
+      "destination": "14:370",
+      "target": "Light/access"
+    },
+    {
+      "source": "14:294",
+      "label": "Settings",
+      "destination": "14:518",
+      "target": "Light/settings"
+    },
+    {
+      "source": "14:299",
+      "label": "Back to alerts",
+      "destination": "14:214",
+      "target": "Light/inbox"
+    },
+    {
+      "source": "14:321",
+      "label": "Switch appearance",
+      "destination": "14:878",
+      "target": "Dark/notifications"
+    },
+    {
+      "source": "14:329",
+      "label": "Alerts",
+      "destination": "14:214",
+      "target": "Light/inbox"
+    },
+    {
+      "source": "14:331",
+      "label": "Access",
+      "destination": "14:370",
+      "target": "Light/access"
+    },
+    {
+      "source": "14:333",
+      "label": "Settings",
+      "destination": "14:518",
+      "target": "Light/settings"
+    },
+    {
+      "source": "14:335",
+      "label": "Open alert",
+      "destination": "14:277",
+      "target": "Light/detail"
+    },
+    {
+      "source": "14:345",
+      "label": "Open alert",
+      "destination": "14:277",
+      "target": "Light/detail"
+    },
+    {
+      "source": "14:355",
+      "label": "View approved access",
+      "destination": "14:370",
+      "target": "Light/access"
+    },
+    {
+      "source": "14:366",
+      "label": "Back to alerts",
+      "destination": "14:214",
+      "target": "Light/inbox"
+    },
+    {
+      "source": "14:375",
+      "label": "Switch appearance",
+      "destination": "14:933",
+      "target": "Dark/access"
+    },
+    {
+      "source": "14:383",
+      "label": "Alerts",
+      "destination": "14:214",
+      "target": "Light/inbox"
+    },
+    {
+      "source": "14:387",
+      "label": "Settings",
+      "destination": "14:518",
+      "target": "Light/settings"
+    },
+    {
+      "source": "14:389",
+      "label": "＋ Request access",
+      "destination": "14:408",
+      "target": "Light/catalogue"
+    },
+    {
+      "source": "14:404",
+      "label": "View pending request",
+      "destination": "14:482",
+      "target": "Light/pending"
+    },
+    {
+      "source": "14:413",
+      "label": "Switch appearance",
+      "destination": "14:972",
+      "target": "Dark/catalogue"
+    },
+    {
+      "source": "14:421",
+      "label": "Alerts",
+      "destination": "14:214",
+      "target": "Light/inbox"
+    },
+    {
+      "source": "14:423",
+      "label": "Access",
+      "destination": "14:370",
+      "target": "Light/access"
+    },
+    {
+      "source": "14:425",
+      "label": "Settings",
+      "destination": "14:518",
+      "target": "Light/settings"
+    },
+    {
+      "source": "14:438",
+      "label": "Select Infrastructure",
+      "destination": "14:448",
+      "target": "Light/request"
+    },
+    {
+      "source": "14:441",
+      "label": "Select Platform engineering",
+      "destination": "14:448",
+      "target": "Light/request"
+    },
+    {
+      "source": "14:444",
+      "label": "Select Database operations",
+      "destination": "14:448",
+      "target": "Light/request"
+    },
+    {
+      "source": "14:453",
+      "label": "Switch appearance",
+      "destination": "14:1013",
+      "target": "Dark/request"
+    },
+    {
+      "source": "14:461",
+      "label": "Alerts",
+      "destination": "14:214",
+      "target": "Light/inbox"
+    },
+    {
+      "source": "14:463",
+      "label": "Access",
+      "destination": "14:370",
+      "target": "Light/access"
+    },
+    {
+      "source": "14:465",
+      "label": "Settings",
+      "destination": "14:518",
+      "target": "Light/settings"
+    },
+    {
+      "source": "14:474",
+      "label": "Send access request",
+      "destination": "14:482",
+      "target": "Light/pending"
+    },
+    {
+      "source": "14:478",
+      "label": "Choose another resource",
+      "destination": "14:408",
+      "target": "Light/catalogue"
+    },
+    {
+      "source": "14:487",
+      "label": "Switch appearance",
+      "destination": "14:1048",
+      "target": "Dark/pending"
+    },
+    {
+      "source": "14:495",
+      "label": "Alerts",
+      "destination": "14:214",
+      "target": "Light/inbox"
+    },
+    {
+      "source": "14:497",
+      "label": "Access",
+      "destination": "14:370",
+      "target": "Light/access"
+    },
+    {
+      "source": "14:499",
+      "label": "Settings",
+      "destination": "14:518",
+      "target": "Light/settings"
+    },
+    {
+      "source": "14:509",
+      "label": "View my access",
+      "destination": "14:370",
+      "target": "Light/access"
+    },
+    {
+      "source": "14:513",
+      "label": "Back to alerts",
+      "destination": "14:214",
+      "target": "Light/inbox"
+    },
+    {
+      "source": "14:523",
+      "label": "Switch appearance",
+      "destination": "14:1085",
+      "target": "Dark/settings"
+    },
+    {
+      "source": "14:531",
+      "label": "Alerts",
+      "destination": "14:214",
+      "target": "Light/inbox"
+    },
+    {
+      "source": "14:533",
+      "label": "Access",
+      "destination": "14:370",
+      "target": "Light/access"
+    },
+    {
+      "source": "14:545",
+      "label": "Use Dark theme",
+      "destination": "14:1085",
+      "target": "Dark/settings"
+    },
+    {
+      "source": "14:547",
+      "label": "Use System theme",
+      "destination": "14:585",
+      "target": "Light/settings-system"
+    },
+    {
+      "source": "14:581",
+      "label": "Sign out",
+      "destination": "14:96",
+      "target": "Light/login"
+    },
+    {
+      "source": "14:590",
+      "label": "Switch appearance",
+      "destination": "14:1153",
+      "target": "Dark/settings-system"
+    },
+    {
+      "source": "14:598",
+      "label": "Alerts",
+      "destination": "14:214",
+      "target": "Light/inbox"
+    },
+    {
+      "source": "14:600",
+      "label": "Access",
+      "destination": "14:370",
+      "target": "Light/access"
+    },
+    {
+      "source": "14:602",
+      "label": "Settings",
+      "destination": "14:518",
+      "target": "Light/settings"
+    },
+    {
+      "source": "14:610",
+      "label": "Use Light theme",
+      "destination": "14:518",
+      "target": "Light/settings"
+    },
+    {
+      "source": "14:612",
+      "label": "Use Dark theme",
+      "destination": "14:1085",
+      "target": "Dark/settings"
+    },
+    {
+      "source": "14:648",
+      "label": "Sign out",
+      "destination": "14:96",
+      "target": "Light/login"
+    },
+    {
+      "source": "14:657",
+      "label": "Switch appearance",
+      "destination": "14:96",
+      "target": "Light/login"
+    },
+    {
+      "source": "14:683",
+      "label": "Sign in",
+      "destination": "14:717",
+      "target": "Dark/totp"
+    },
+    {
+      "source": "14:687",
+      "label": "Change temporary password",
+      "destination": "14:690",
+      "target": "Dark/password"
+    },
+    {
+      "source": "14:688",
+      "label": "Request reset",
+      "destination": "14:747",
+      "target": "Dark/reset"
+    },
+    {
+      "source": "14:695",
+      "label": "Switch appearance",
+      "destination": "14:133",
+      "target": "Light/password"
+    },
+    {
+      "source": "14:709",
+      "label": "Save password",
+      "destination": "14:717",
+      "target": "Dark/totp"
+    },
+    {
+      "source": "14:713",
+      "label": "Back to sign in",
+      "destination": "14:652",
+      "target": "Dark/login"
+    },
+    {
+      "source": "14:722",
+      "label": "Switch appearance",
+      "destination": "14:159",
+      "target": "Light/totp"
+    },
+    {
+      "source": "14:738",
+      "label": "Verify and continue",
+      "destination": "14:774",
+      "target": "Dark/inbox"
+    },
+    {
+      "source": "14:742",
+      "label": "Back to sign in",
+      "destination": "14:652",
+      "target": "Dark/login"
+    },
+    {
+      "source": "14:752",
+      "label": "Switch appearance",
+      "destination": "14:188",
+      "target": "Light/reset"
+    },
+    {
+      "source": "14:765",
+      "label": "Send reset request",
+      "destination": "14:652",
+      "target": "Dark/login"
+    },
+    {
+      "source": "14:769",
+      "label": "Back to sign in",
+      "destination": "14:652",
+      "target": "Dark/login"
+    },
+    {
+      "source": "14:779",
+      "label": "Switch appearance",
+      "destination": "14:214",
+      "target": "Light/inbox"
+    },
+    {
+      "source": "14:790",
+      "label": "Access",
+      "destination": "14:933",
+      "target": "Dark/access"
+    },
+    {
+      "source": "14:792",
+      "label": "Settings",
+      "destination": "14:1085",
+      "target": "Dark/settings"
+    },
+    {
+      "source": "14:804",
+      "label": "Open activity",
+      "destination": "14:878",
+      "target": "Dark/notifications"
+    },
+    {
+      "source": "14:808",
+      "label": "Open alert",
+      "destination": "14:838",
+      "target": "Dark/detail"
+    },
+    {
+      "source": "14:818",
+      "label": "Open alert",
+      "destination": "14:838",
+      "target": "Dark/detail"
+    },
+    {
+      "source": "14:828",
+      "label": "Open alert",
+      "destination": "14:838",
+      "target": "Dark/detail"
+    },
+    {
+      "source": "14:843",
+      "label": "Switch appearance",
+      "destination": "14:277",
+      "target": "Light/detail"
+    },
+    {
+      "source": "14:852",
+      "label": "Alerts",
+      "destination": "14:774",
+      "target": "Dark/inbox"
+    },
+    {
+      "source": "14:854",
+      "label": "Access",
+      "destination": "14:933",
+      "target": "Dark/access"
+    },
+    {
+      "source": "14:856",
+      "label": "Settings",
+      "destination": "14:1085",
+      "target": "Dark/settings"
+    },
+    {
+      "source": "14:861",
+      "label": "Back to alerts",
+      "destination": "14:774",
+      "target": "Dark/inbox"
+    },
+    {
+      "source": "14:883",
+      "label": "Switch appearance",
+      "destination": "14:316",
+      "target": "Light/notifications"
+    },
+    {
+      "source": "14:892",
+      "label": "Alerts",
+      "destination": "14:774",
+      "target": "Dark/inbox"
+    },
+    {
+      "source": "14:894",
+      "label": "Access",
+      "destination": "14:933",
+      "target": "Dark/access"
+    },
+    {
+      "source": "14:896",
+      "label": "Settings",
+      "destination": "14:1085",
+      "target": "Dark/settings"
+    },
+    {
+      "source": "14:898",
+      "label": "Open alert",
+      "destination": "14:838",
+      "target": "Dark/detail"
+    },
+    {
+      "source": "14:908",
+      "label": "Open alert",
+      "destination": "14:838",
+      "target": "Dark/detail"
+    },
+    {
+      "source": "14:918",
+      "label": "View approved access",
+      "destination": "14:933",
+      "target": "Dark/access"
+    },
+    {
+      "source": "14:929",
+      "label": "Back to alerts",
+      "destination": "14:774",
+      "target": "Dark/inbox"
+    },
+    {
+      "source": "14:938",
+      "label": "Switch appearance",
+      "destination": "14:370",
+      "target": "Light/access"
+    },
+    {
+      "source": "14:947",
+      "label": "Alerts",
+      "destination": "14:774",
+      "target": "Dark/inbox"
+    },
+    {
+      "source": "14:951",
+      "label": "Settings",
+      "destination": "14:1085",
+      "target": "Dark/settings"
+    },
+    {
+      "source": "14:953",
+      "label": "＋ Request access",
+      "destination": "14:972",
+      "target": "Dark/catalogue"
+    },
+    {
+      "source": "14:968",
+      "label": "View pending request",
+      "destination": "14:1048",
+      "target": "Dark/pending"
+    },
+    {
+      "source": "14:977",
+      "label": "Switch appearance",
+      "destination": "14:408",
+      "target": "Light/catalogue"
+    },
+    {
+      "source": "14:986",
+      "label": "Alerts",
+      "destination": "14:774",
+      "target": "Dark/inbox"
+    },
+    {
+      "source": "14:988",
+      "label": "Access",
+      "destination": "14:933",
+      "target": "Dark/access"
+    },
+    {
+      "source": "14:990",
+      "label": "Settings",
+      "destination": "14:1085",
+      "target": "Dark/settings"
+    },
+    {
+      "source": "14:1003",
+      "label": "Select Infrastructure",
+      "destination": "14:1013",
+      "target": "Dark/request"
+    },
+    {
+      "source": "14:1006",
+      "label": "Select Platform engineering",
+      "destination": "14:1013",
+      "target": "Dark/request"
+    },
+    {
+      "source": "14:1009",
+      "label": "Select Database operations",
+      "destination": "14:1013",
+      "target": "Dark/request"
+    },
+    {
+      "source": "14:1018",
+      "label": "Switch appearance",
+      "destination": "14:448",
+      "target": "Light/request"
+    },
+    {
+      "source": "14:1027",
+      "label": "Alerts",
+      "destination": "14:774",
+      "target": "Dark/inbox"
+    },
+    {
+      "source": "14:1029",
+      "label": "Access",
+      "destination": "14:933",
+      "target": "Dark/access"
+    },
+    {
+      "source": "14:1031",
+      "label": "Settings",
+      "destination": "14:1085",
+      "target": "Dark/settings"
+    },
+    {
+      "source": "14:1040",
+      "label": "Send access request",
+      "destination": "14:1048",
+      "target": "Dark/pending"
+    },
+    {
+      "source": "14:1044",
+      "label": "Choose another resource",
+      "destination": "14:972",
+      "target": "Dark/catalogue"
+    },
+    {
+      "source": "14:1053",
+      "label": "Switch appearance",
+      "destination": "14:482",
+      "target": "Light/pending"
+    },
+    {
+      "source": "14:1062",
+      "label": "Alerts",
+      "destination": "14:774",
+      "target": "Dark/inbox"
+    },
+    {
+      "source": "14:1064",
+      "label": "Access",
+      "destination": "14:933",
+      "target": "Dark/access"
+    },
+    {
+      "source": "14:1066",
+      "label": "Settings",
+      "destination": "14:1085",
+      "target": "Dark/settings"
+    },
+    {
+      "source": "14:1076",
+      "label": "View my access",
+      "destination": "14:933",
+      "target": "Dark/access"
+    },
+    {
+      "source": "14:1080",
+      "label": "Back to alerts",
+      "destination": "14:774",
+      "target": "Dark/inbox"
+    },
+    {
+      "source": "14:1090",
+      "label": "Switch appearance",
+      "destination": "14:518",
+      "target": "Light/settings"
+    },
+    {
+      "source": "14:1099",
+      "label": "Alerts",
+      "destination": "14:774",
+      "target": "Dark/inbox"
+    },
+    {
+      "source": "14:1101",
+      "label": "Access",
+      "destination": "14:933",
+      "target": "Dark/access"
+    },
+    {
+      "source": "14:1111",
+      "label": "Use Light theme",
+      "destination": "14:518",
+      "target": "Light/settings"
+    },
+    {
+      "source": "14:1115",
+      "label": "Use System theme",
+      "destination": "14:1153",
+      "target": "Dark/settings-system"
+    },
+    {
+      "source": "14:1149",
+      "label": "Sign out",
+      "destination": "14:652",
+      "target": "Dark/login"
+    },
+    {
+      "source": "14:1158",
+      "label": "Switch appearance",
+      "destination": "14:585",
+      "target": "Light/settings-system"
+    },
+    {
+      "source": "14:1167",
+      "label": "Alerts",
+      "destination": "14:774",
+      "target": "Dark/inbox"
+    },
+    {
+      "source": "14:1169",
+      "label": "Access",
+      "destination": "14:933",
+      "target": "Dark/access"
+    },
+    {
+      "source": "14:1171",
+      "label": "Settings",
+      "destination": "14:1085",
+      "target": "Dark/settings"
+    },
+    {
+      "source": "14:1179",
+      "label": "Use Light theme",
+      "destination": "14:518",
+      "target": "Light/settings"
+    },
+    {
+      "source": "14:1181",
+      "label": "Use Dark theme",
+      "destination": "14:1085",
+      "target": "Dark/settings"
+    },
+    {
+      "source": "14:1217",
+      "label": "Sign out",
+      "destination": "14:652",
+      "target": "Dark/login"
+    }
+  ],
+  "notes": [
+    "Native clickable prototype; simulated data only.",
+    "Static flow-map page creation was blocked by the Figma Starter tool limit.",
+    "Light/Dark/System are navigation previews, not running app theme settings."
+  ]
+}

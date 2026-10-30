@@ -1,6 +1,12 @@
 # OpsRadar mobile visual direction
 
-Status: first design concept, 2026-10-30. Six native editable Figma screens and separate SVG concept illustrations are available. These are proposed designs, not implemented mobile screens. All names, counts, dates, and permission states are sample data.
+## Selected direction: Prism
+
+The user selected **Prism**, with Precision-style severity icons and Light/Dark/System appearance controls. Open the [Prism design and prototype guide](PRISM.md) for the current design links, 26 screens, 140 native prototype connections, theme behavior, and labeled flow-map fallback. The radar/orbit concepts below are archived alternatives, not the selected direction. The mobile app itself is still unimplemented.
+
+## Archived first concept: Radar editorial
+
+Status: archived design concept, 2026-10-30. Six earlier native editable Figma screens and separate SVG concept illustrations are retained. These are proposed designs, not implemented mobile screens. All names, counts, dates, and permission states are sample data.
 
 Open [OpsRadar Mobile in Figma](https://www.figma.com/design/osWxsVNpXNTD33zC3c6abf?node-id=4-300). The Figma file is the primary design review surface. It contains editable DM Sans text, Auto Layout screen/card hierarchies, Simple Design System button instances, and Material 3 switch instances with OpsRadar color overrides. The SVGs are a separate earlier illustration pass and are not a pixel-identical export of the native file.
 

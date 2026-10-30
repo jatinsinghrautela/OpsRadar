@@ -11,6 +11,8 @@ Reviewed: 2026-10-30. Documentation-only milestone. "Disabled" below means a pro
 | Severity preference storage | Implemented | Major/critical on, minor/trivial off initially |
 | Android mobile screens | Not implemented | First mobile target |
 | iOS mobile screens | Not implemented | Shared-source target; Apple build/test gate |
+| Prism Light/Dark screen designs and theme control | 26 editable Figma frames, simulated appearance states | Future app must implement/persist Light/Dark/System |
+| Click-through design navigation | 140 native Figma prototype connections | Sample states only; not live API integration |
 | Refresh tokens and revocable device sessions | Not implemented | Required for mobile release |
 | Device registration and push outbox/worker | Not implemented | Disabled until explicitly configured |
 | Android native push | Not implemented | Enable after free FCM/Expo configuration and real-device tests |
