@@ -9,17 +9,29 @@ function getSecretKey() {
   return process.env.JWT_SECRET || process.env.SECRET_KEY || SECRET_KEY;
 }
 
-const authenticateToken = (req, res, next) => {
+const authenticateToken = async (req, res, next) => {
   const token = req.headers['authorization']?.split(' ')[1];
   if (!token) return res.status(401).json({ error: 'No token provided' });
-  jwt.verify(token, getSecretKey(), (err, user) => {
-    if (err) {
+  try {
+    const payload = jwt.verify(token, getSecretKey());
+    if (payload.purpose) return res.status(403).json({ error: 'This token cannot access application data' });
+    const { User } = require('../models/user');
+    const user = await User.findByPk(payload.user_id);
+    if (!user?.is_active || user.must_change_password) return res.status(401).json({ error: 'Account inactive or password change required' });
+    if (payload.sid) {
+      const { MobileSession } = require('../models/mobile');
+      const session = await MobileSession.findByPk(payload.sid);
+      if (!session || session.user_id !== user.user_id || session.revoked_at || session.expires_at <= new Date()) return res.status(401).json({ error: 'Session expired' });
+    }
+    req.user = { user_id: user.user_id, is_admin: user.is_admin, sid: payload.sid };
+    next();
+  } catch (err) {
+    if (err.name === 'JsonWebTokenError' || err.name === 'TokenExpiredError') {
       logger.warn('auth_token_invalid');
       return res.status(403).json({ error: 'Invalid token' });
     }
-    req.user = user;
-    next();
-  });
+    return res.status(500).json({ error: 'Authentication unavailable' });
+  }
 };
 
 const requireAdmin = (req, res, next) => {
@@ -54,14 +66,7 @@ const authenticateAlertIngest = async (req, res, next) => {
       logger.warn('ingest_auth_missing');
       return res.status(401).json({ error: 'Missing X-API-Key or Bearer token' });
     }
-    jwt.verify(token, getSecretKey(), (err, user) => {
-      if (err) {
-        logger.warn('ingest_jwt_invalid');
-        return res.status(403).json({ error: 'Invalid token' });
-      }
-      req.user = user;
-      next();
-    });
+    return authenticateToken(req, res, next);
   } catch (error) {
     logger.error('ingest_auth_error', { error: error.message });
     res.status(500).json({ error: 'Authentication failed' });

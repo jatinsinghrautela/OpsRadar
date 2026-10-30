@@ -11,7 +11,7 @@ const Notification = sequelize.define('Notification', {
   },
   alert_id: {
     type: DataTypes.INTEGER,
-    allowNull: false,
+    allowNull: true,
     references: { model: Alert, key: 'alert_id' }
   },
   severity: {
@@ -20,7 +20,8 @@ const Notification = sequelize.define('Notification', {
   },
   message: { type: DataTypes.TEXT, allowNull: false },
   is_read: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: false },
-  read_at: { type: DataTypes.DATE, allowNull: true }
+  read_at: { type: DataTypes.DATE, allowNull: true },
+  kind: { type: DataTypes.STRING(40), allowNull: false, defaultValue: 'alert' }
 }, {
   timestamps: true,
   indexes: [

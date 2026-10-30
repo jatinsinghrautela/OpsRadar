@@ -16,6 +16,7 @@ async function boot() {
 
   await runMigrations();
   await bootstrapAdmin();
+  require('./services/push').startPushWorker();
 
   const app = createApp();
   const PORT = Number(process.env.PORT) || 5000;

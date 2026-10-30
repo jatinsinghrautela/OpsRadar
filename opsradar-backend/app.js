@@ -5,15 +5,18 @@ function createApp() {
   const app = express();
 
   app.use(express.json());
+  const { rateLimit } = require('./middleware/rateLimit');
+  app.use(['/login', '/login/totp', '/change-password', '/password-reset-requests'], rateLimit({ limit: 40 }));
 
   const CORS_ORIGIN = process.env.CORS_ORIGIN || 'http://localhost:3000';
   app.use(cors({
-    origin: CORS_ORIGIN,
+    origin: CORS_ORIGIN.split(',').map(value => value.trim()).filter(Boolean),
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization', 'X-API-Key', 'X-Change-Token']
   }));
 
   app.use(require('./routes/health'));
+  app.use('/mobile', require('./routes/mobile'));
   app.use(require('./routes/auth'));
   app.use(require('./routes/passwordReset'));
   app.use(require('./routes/alerts'));

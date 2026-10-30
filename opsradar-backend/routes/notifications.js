@@ -2,6 +2,7 @@ const express = require('express');
 const { Notification } = require('../models/notification');
 const { authenticateToken } = require('../middleware/auth');
 const logger = require('../utils/logger');
+const { notificationScope } = require('../services/notificationScope');
 
 const router = express.Router();
 
@@ -9,11 +10,14 @@ router.get('/notifications', authenticateToken, async (req, res) => {
   try {
     const limit = Math.min(Number(req.query.limit) || 30, 100);
     const unreadOnly = String(req.query.unread || '') === 'true';
-    const where = { user_id: req.user.user_id };
+    const scope = await notificationScope(req.user);
+    const where = scope.where;
     if (unreadOnly) where.is_read = false;
 
     const rows = await Notification.findAll({
       where,
+      include: scope.include,
+      subQuery: false,
       order: [['createdAt', 'DESC']],
       limit
     });
@@ -25,7 +29,8 @@ router.get('/notifications', authenticateToken, async (req, res) => {
         message: n.message,
         is_read: n.is_read,
         read_at: n.read_at,
-        created_at: n.createdAt
+        created_at: n.createdAt,
+        kind: n.kind
       }))
     );
   } catch (error) {
@@ -36,9 +41,8 @@ router.get('/notifications', authenticateToken, async (req, res) => {
 
 router.get('/notifications/unread-count', authenticateToken, async (req, res) => {
   try {
-    const count = await Notification.count({
-      where: { user_id: req.user.user_id, is_read: false }
-    });
+    const scope = await notificationScope(req.user);
+    const count = await Notification.count({ ...scope, where: { ...scope.where, is_read: false } });
     res.json({ count });
   } catch (error) {
     logger.error('notifications_unread_error', { error: error.message });
@@ -48,8 +52,11 @@ router.get('/notifications/unread-count', authenticateToken, async (req, res) =>
 
 router.post('/notifications/:id/read', authenticateToken, async (req, res) => {
   try {
+    const scope = await notificationScope(req.user);
     const row = await Notification.findOne({
+      include: scope.include,
       where: {
+        ...scope.where,
         notification_id: req.params.id,
         user_id: req.user.user_id
       }
@@ -71,11 +78,14 @@ router.post('/notifications/:id/read', authenticateToken, async (req, res) => {
 
 router.post('/notifications/read-all', authenticateToken, async (req, res) => {
   try {
+    const scope = await notificationScope(req.user);
+    const visible = await Notification.findAll({ ...scope, attributes: ['notification_id'] });
     const [updated] = await Notification.update(
       { is_read: true, read_at: new Date() },
       {
         where: {
           user_id: req.user.user_id,
+          notification_id: visible.map(n => n.notification_id),
           is_read: false
         }
       }

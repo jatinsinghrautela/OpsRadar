@@ -22,20 +22,16 @@ router.get('/notification-prefs', authenticateToken, async (req, res) => {
 router.put('/notification-prefs', authenticateToken, async (req, res) => {
   try {
     const body = req.body || {};
-    const next = normalizePrefs({
-      critical: body.critical,
-      major: body.major,
-      minor: body.minor,
-      trivial: body.trivial
-    });
+    const user = await User.findByPk(req.user.user_id);
+    if (!user) return res.status(404).json({ error: 'User not found' });
+    const next = normalizePrefs(user.notify_prefs);
     for (const key of ['critical', 'major', 'minor', 'trivial']) {
       if (Object.prototype.hasOwnProperty.call(body, key)) {
-        next[key] = Boolean(body[key]);
+        if (typeof body[key] !== 'boolean') return res.status(400).json({ error: 'Preferences must be boolean values' });
+        next[key] = body[key];
       }
     }
 
-    const user = await User.findByPk(req.user.user_id);
-    if (!user) return res.status(404).json({ error: 'User not found' });
     await user.update({ notify_prefs: next });
     res.json(next);
   } catch (error) {

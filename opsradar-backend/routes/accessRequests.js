@@ -8,6 +8,7 @@ const { UserPermission } = require('../models/user_permission');
 const { AuditLog } = require('../models/audit_log');
 const { authenticateToken, requireAdmin } = require('../middleware/auth');
 const logger = require('../utils/logger');
+const { createAccessNotification } = require('../services/push');
 
 const router = express.Router();
 
@@ -173,6 +174,7 @@ router.post('/access-requests/:id/approve', authenticateToken, requireAdmin, asy
       }
     });
     logger.info('access_approved', { request_id: request.request_id });
+    await createAccessNotification(request.user_id, true);
     res.json({ message: 'Access approved', request });
   } catch (error) {
     logger.error('access_approve_error', { error: error.message });
@@ -197,6 +199,7 @@ router.post('/access-requests/:id/reject', authenticateToken, requireAdmin, asyn
       action: 'access_rejected',
       details: { request_id: request.request_id }
     });
+    await createAccessNotification(request.user_id, false);
     res.json({ message: 'Request rejected' });
   } catch (error) {
     logger.error('access_reject_error', { error: error.message });

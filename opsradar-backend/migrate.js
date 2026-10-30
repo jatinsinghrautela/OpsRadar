@@ -6,7 +6,7 @@ const logger = require('./utils/logger');
 function createMigrator() {
   return new Umzug({
     migrations: {
-      glob: path.join(__dirname, 'migrations', '*.js'),
+      glob: path.join(__dirname, 'migrations', '*.js').replace(/\\/g, '/'),
       resolve: ({ name, path: migrationPath, context }) => {
         const migration = require(migrationPath);
         return {

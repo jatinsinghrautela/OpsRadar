@@ -106,7 +106,7 @@ router.get('/alerts', authenticateToken, async (req, res) => {
 
     if (!wantsPagination) {
       const alerts = await Alert.findAll({
-        where: Object.keys(where).length ? where : undefined,
+        where,
         include,
         order: [['updatedAt', 'DESC']]
       });
@@ -121,7 +121,7 @@ router.get('/alerts', authenticateToken, async (req, res) => {
     const offset = (page - 1) * pageSize;
 
     const { count, rows } = await Alert.findAndCountAll({
-      where: Object.keys(where).length ? where : undefined,
+      where,
       include,
       order: [['updatedAt', 'DESC']],
       limit: pageSize,
@@ -155,7 +155,7 @@ router.delete('/alerts', authenticateToken, requireAdmin, async (req, res) => {
 
     const where = scope === 'all' ? {} : { status: scope };
     const alerts = await Alert.findAll({
-      where: Object.keys(where).length ? where : undefined,
+      where,
       attributes: ['alert_id']
     });
     const ids = alerts.map((a) => a.alert_id);

@@ -4,6 +4,8 @@ const { UserGroupMembership } = require('../models/user_group_membership');
 const { UserPermission } = require('../models/user_permission');
 const { Notification } = require('../models/notification');
 const logger = require('../utils/logger');
+const { sequelize } = require('../models/country');
+const { enqueueNotifications } = require('./push');
 
 const DEFAULT_PREFS = {
   critical: true,
@@ -103,7 +105,10 @@ async function createNotificationsForAlert(alert) {
       }));
 
     if (rows.length) {
-      await Notification.bulkCreate(rows);
+      await sequelize.transaction(async transaction => {
+        const notifications = await Notification.bulkCreate(rows, { transaction });
+        await enqueueNotifications(notifications, transaction);
+      });
     }
     await alert.update({ notification_sent: true });
     logger.info('notifications_created', {
@@ -130,7 +135,10 @@ async function createResolveNotifications(alert) {
       message: `Resolved: ${alert.message}`,
       is_read: false
     }));
-    await Notification.bulkCreate(rows);
+    await sequelize.transaction(async transaction => {
+      const notifications = await Notification.bulkCreate(rows, { transaction });
+      await enqueueNotifications(notifications, transaction);
+    });
     logger.info('resolve_notifications_created', {
       alert_id: alert.alert_id,
       count: rows.length
